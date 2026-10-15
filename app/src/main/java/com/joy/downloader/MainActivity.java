@@ -3,6 +3,7 @@ package com.joy.downloader;
 import android.app.Activity;
 import android.app.DownloadManager;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -29,7 +30,23 @@ public class MainActivity extends Activity {
         s.setAllowFileAccessFromFileURLs(true);
         s.setAllowUniversalAccessFromFileURLs(true);
 
-        webView.setWebViewClient(new WebViewClient());
+        webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                // http/https stay in the WebView; app schemes (tg:, whatsapp:, tel:...)
+                // open in their external app instead of showing an error page
+                if (url != null && (url.startsWith("http://") || url.startsWith("https://")
+                        || url.startsWith("file://"))) {
+                    return false;
+                }
+                try {
+                    Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(i);
+                } catch (Exception ignored) {}
+                return true;
+            }
+        });
 
         // Route file downloads through Android's DownloadManager
         webView.setDownloadListener(new DownloadListener() {
