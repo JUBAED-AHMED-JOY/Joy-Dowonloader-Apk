@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.webkit.DownloadListener;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -32,8 +33,7 @@ public class MainActivity extends Activity {
 
         webView.setWebViewClient(new WebViewClient() {
             @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                // http/https stay in the WebView; app schemes (tg:, whatsapp:, tel:...)
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {                // http/https stay in the WebView; app schemes (tg:, whatsapp:, tel:...)
                 // open in their external app instead of showing an error page
                 if (url != null && (url.startsWith("http://") || url.startsWith("https://")
                         || url.startsWith("file://"))) {
@@ -74,6 +74,33 @@ public class MainActivity extends Activity {
                 } catch (Exception ignored) {}
             }
         });
+
+        // JS bridge: page calls JOY.downloadFile(url, title) -> saved as "Joy_<title>.ext"
+        webView.addJavascriptInterface(new Object() {
+            @JavascriptInterface
+            public void downloadFile(String url, String title) {
+                try {
+                    DownloadManager.Request req = new DownloadManager.Request(Uri.parse(url));
+                    req.setNotificationVisibility(
+                        DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+                    req.setAllowedOverMetered(true);
+                    req.setAllowedOverRoaming(true);
+                    String ext = ".mp4";
+                    String lower = url.toLowerCase();
+                    if (lower.contains(".mp3")) ext = ".mp3";
+                    else if (lower.contains(".m4a")) ext = ".m4a";
+                    else if (lower.contains(".webm")) ext = ".webm";
+                    String safe = String.valueOf(title).replaceAll("[\\\\/:*?\"<>|]", "_").trim();
+                    if (safe.length() > 60) safe = safe.substring(0, 60).trim();
+                    String name = safe.isEmpty() ? "Joy_Video_" + System.currentTimeMillis() + ext
+                                                : "Joy_" + safe + ext;
+                    req.setTitle(name);
+                    req.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, name);
+                    DownloadManager dm = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+                    if (dm != null) dm.enqueue(req);
+                } catch (Exception ignored) {}
+            }
+        }, "JOY");
 
         if (savedInstanceState != null) {
             webView.restoreState(savedInstanceState);
