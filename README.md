@@ -2,7 +2,7 @@
 
 **Download videos from Facebook, YouTube, TikTok, Twitter/X, Instagram & Terabox — right on your phone.**
 
-> API by [Joy Ahmed](https://github.com/JUBAED-AHMED-JOY)
+> App by [Joy Ahmed](https://github.com/JUBAED-AHMED-JOY) · Video API by [Mohammad Nayan](https://nayan-video-downloader.vercel.app)
 
 ---
 
@@ -20,7 +20,7 @@ https://github.com/JUBAED-AHMED-JOY/Joy-Dowonloader-Apk/releases/download/v1.0/j
 
 | | |
 |---|---|
-| 📦 File | `joy-downloader.apk` (169 KB) |
+| 📦 File | `joy-downloader.apk` (~253 KB) |
 | 📱 Requires | Android 5.0+ |
 | 🔖 Version | v1.0 |
 
@@ -32,35 +32,34 @@ https://github.com/JUBAED-AHMED-JOY/Joy-Dowonloader-Apk/releases/download/v1.0/j
 2. If your phone asks, allow **"Install unknown apps"** for your browser / file manager
 3. Tap **Install**, then **Open** — done!
 
-## ⚙️ First-time Setup
-
-1. Open the app and tap **⚙️** (top-right corner)
-2. Enter your downloader API URL (example: `https://your-app.vercel.app`)
-3. Tap **Save** — you only do this once
+**No setup needed** — open the app and start downloading right away. ✅
 
 ## 🎬 How to Use
 
 1. **Paste** any video link (Facebook, YouTube, TikTok, Twitter/X, Instagram, Terabox)
 2. Tap **⬇ Get Download Links**
-3. You'll see the **title, thumbnail, quality and file size**
-4. Tap **Download** — the video saves to your phone's Download folder
+3. Watch the **in-app video preview**, tap **📋 Copy Title** if you need the title
+4. Tap **⬇ Download Video** or **🎵 Download Audio** — it saves to your Download folder as `Joy_<video title>.mp4`
 
 ---
 
 ## ✨ Features
 
 - 🎥 6 platforms supported (FB, YT, TikTok, Twitter/X, IG, Terabox)
-- 📊 Shows video title, thumbnail & file size before downloading
-- 📲 Downloads via Android Download Manager (pause/resume, notifications)
+- ▶️ In-app video player with preview
+- 📋 One-tap title copy button
+- 💾 Downloads save as `Joy_<title>` via Android Download Manager (notifications, pause/resume)
+- 🌧️ Always-on rain animation
+- 📇 Built-in contact card — WhatsApp, Telegram, GitHub, animated address, developer info & skills
 - 🌙 Dark mode UI
-- 🔗 Contact links (GitHub) built into the app
+- 🔐 Protected code (encoded + obfuscated)
 
 ---
 
 ### 🔧 For Developers
 
-- **App source:** this repo (`app/` — WebView wrapper, Java)
-- **Backend API:** [Joy-video-dowonloader](https://github.com/JUBAED-AHMED-JOY/Joy-video-dowonloader)
-- **Build:** Android SDK 34 · minSdk 21 · targetSdk 34 · debug-signed (manual aapt2/d8/apksigner build)
+- **App source:** this repo (`app/` — WebView Android wrapper, Java)
+- **Video API:** [nayan-video-downloader](https://nayan-video-downloader.vercel.app) by Mohammad Nayan
+- **Build:** Android SDK 34 · minSdk 21 · targetSdk 34 · R8 obfuscated · debug-signed (manual aapt2/R8/apksigner build)
 
 *Made with ❤️ by Joy Ahmed*
