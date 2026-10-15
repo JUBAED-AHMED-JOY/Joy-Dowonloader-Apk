@@ -12,6 +12,12 @@
 
 ☝️ **Click the link above — the APK downloads straight to your phone.**
 
+**🔗 Share this link** (copy-paste kore anyone ke pathao):
+
+```
+https://github.com/JUBAED-AHMED-JOY/Joy-Dowonloader-Apk/releases/download/v1.0/joy-downloader.apk
+```
+
 | | |
 |---|---|
 | 📦 File | `joy-downloader.apk` (169 KB) |
