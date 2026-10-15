@@ -58,7 +58,7 @@ public class MainActivity extends Activity {
                     DownloadManager.Request req = new DownloadManager.Request(Uri.parse(url));
                     req.setNotificationVisibility(
                         DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-                    req.setTitle("JOY Download");
+                    req.setTitle("Downloading video");
                     req.addRequestHeader("User-Agent", userAgent);
                     req.setAllowedOverMetered(true);
                     req.setAllowedOverRoaming(true);
