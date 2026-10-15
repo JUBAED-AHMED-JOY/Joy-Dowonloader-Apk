@@ -59,7 +59,15 @@ public class MainActivity extends Activity {
                     req.setNotificationVisibility(
                         DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
                     req.setTitle("JOY Download");
-                    String name = "joy_" + System.currentTimeMillis() + ".mp4";
+                    req.addRequestHeader("User-Agent", userAgent);
+                    req.setAllowedOverMetered(true);
+                    req.setAllowedOverRoaming(true);
+                    String name = "joy_" + System.currentTimeMillis();
+                    String lower = url.toLowerCase();
+                    if (lower.contains(".mp3")) name += ".mp3";
+                    else if (lower.contains(".m4a")) name += ".m4a";
+                    else if (lower.contains(".webm")) name += ".webm";
+                    else name += ".mp4";
                     req.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, name);
                     DownloadManager dm = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
                     if (dm != null) dm.enqueue(req);
