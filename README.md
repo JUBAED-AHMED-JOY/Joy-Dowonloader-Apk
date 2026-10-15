@@ -56,10 +56,4 @@ https://github.com/JUBAED-AHMED-JOY/Joy-Dowonloader-Apk/releases/download/v1.0/j
 
 ---
 
-### 🔧 For Developers
-
-- **App source:** this repo (`app/` — WebView Android wrapper, Java)
-- **Video API:** [nayan-video-downloader](https://nayan-video-downloader.vercel.app) by Mohammad Nayan
-- **Build:** Android SDK 34 · minSdk 21 · targetSdk 34 · R8 obfuscated · debug-signed (manual aapt2/R8/apksigner build)
-
 *Made with ❤️ by Joy Ahmed*
