@@ -43,9 +43,37 @@
   .err { color: #f85149; font-size: 13px; text-align: center; padding: 8px; }
   .loading { text-align: center; color: #8b949e; font-size: 13px; padding: 12px; }
   footer { text-align: center; margin-top: 22px; padding-bottom: 20px; }
-  footer .info { background: #161b22; border: 1px solid #30363d; border-radius: 14px; padding: 16px; margin-bottom: 12px; }
-  footer .infoname { font-size: 16px; font-weight: 700; color: #58a6ff; margin-bottom: 6px; }
-  footer .infodet { font-size: 12px; color: #8b949e; margin-bottom: 3px; }
+  .contact-card { background: linear-gradient(145deg, #1a2e35, #243b43); border: 1px solid #30363d; border-radius: 16px; padding: 24px 16px; margin-bottom: 12px; }
+  .contact-card .profile { width: 150px; height: 150px; object-fit: cover; border-radius: 50%; border: 5px solid #fff; margin-bottom: 12px; animation: popIn 0.8s ease; }
+  @keyframes popIn { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .contact-card h1 { font-size: 24px; letter-spacing: 2px; margin-bottom: 4px; }
+  .contact-card .subtitle { color: #8b949e; font-size: 14px; margin-bottom: 18px; }
+  .cbuttons { display: flex; flex-direction: column; gap: 10px; margin-bottom: 6px; }
+  .cbtn { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 14px; border-radius: 50px; text-decoration: none; color: #fff; font-size: 16px; font-weight: 700; box-shadow: 0 4px 10px #0005; }
+  .cbtn:active { transform: scale(0.97); }
+  .cbtn.whatsapp { background: #20ce69; }
+  .cbtn.wpnum { flex-direction: column; gap: 2px; }
+  .cbtn .wpn { font-size: 13px; font-weight: 600; opacity: 0.95; }
+  .cbtn.telegram { background: #078dc9; }
+  .cbtn.github { background: #24292e; border: 1px solid #30363d; }
+  .location { margin: 18px 0 6px; font-size: 16px; font-weight: 700; animation: addrGlow 2.5s ease-in-out infinite; }
+  .location .pin { display: inline-block; animation: pinBounce 1.6s ease-in-out infinite; }
+  @keyframes addrGlow {
+    0%, 100% { text-shadow: 0 0 4px #58a6ff66; transform: scale(1); }
+    50% { text-shadow: 0 0 18px #58a6ff, 0 0 32px #58a6ff88; transform: scale(1.04); }
+  }
+  @keyframes pinBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+  .cdiv { border: 0; border-top: 1px dashed #526970; margin: 16px 0; }
+  .contact-card h2 { color: #ffdf22; font-size: 18px; margin-bottom: 12px; }
+  .skills { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+  .skill { padding: 10px 16px; border: 2px solid #fff; border-radius: 50px; font-size: 13px; font-weight: 700; }
+  .skill.js { background: linear-gradient(100deg, #ff786e, #ffad70); }
+  .skill.html { background: #079ce7; }
+  .skill.css { background: #f6a900; }
+  .skill.node { background: #399a61; }
   footer .fl { display: flex; justify-content: center; gap: 14px; margin-bottom: 8px; }
   footer a { color: #58a6ff; font-size: 13px; text-decoration: none; }
   footer .fb { font-size: 11px; color: #6e7681; }
@@ -69,15 +97,24 @@
   <div class="card" id="result"></div>
 
   <footer>
-    <div class="info">
-      <div class="infoname">JOY AHMED</div>
-      <div class="infodet">📍 Jamalpur, Dhaka, Bangladesh</div>
-      <div class="infodet">💻 JavaScript · HTML · Telegram Bot Developer</div>
-    </div>
-    <div class="fl">
-      <a href="https://github.com/JUBAED-AHMED-JOY">GitHub</a>
-      <a href="https://joy-info.vercel.app">Contact</a>
-      <a href="https://t.me/">Telegram</a>
+    <div class="contact-card">
+      <img src="profile.jpg" class="profile" alt="JOY AHMED">
+      <h1>JOY AHMED</h1>
+      <p class="subtitle">Connect with me</p>
+      <div class="cbuttons">
+        <a href="https://wa.me/8801709045888" class="cbtn whatsapp wpnum" target="_blank"><span>☏ WhatsApp</span><span class="wpn">+8801709045888</span></a>
+        <a href="https://t.me/JOY_AHMED_88" class="cbtn telegram" target="_blank">➤ Telegram</a>
+        <a href="https://github.com/JUBAED-AHMED-JOY" class="cbtn github" target="_blank">● GitHub</a>
+      </div>
+      <p class="location"><span class="pin">📍</span> Jamalpur, Dhaka, Bangladesh</p>
+      <hr class="cdiv">
+      <h2>🎁 SKILLS</h2>
+      <div class="skills">
+        <span class="skill js">JS JavaScript</span>
+        <span class="skill html">▣ HTML</span>
+        <span class="skill css">▣ CSS</span>
+        <span class="skill node">⬡ Node.js</span>
+      </div>
     </div>
     <div class="fb">JOY Video Downloader · API by Joy Ahmed</div>
   </footer>
