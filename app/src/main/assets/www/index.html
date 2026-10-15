@@ -57,7 +57,14 @@
   .cbtn.telegram { background: #078dc9; }
   .cbtn.github { background: #24292e; border: 1px solid #30363d; }
   .location { margin: 18px 0 6px; font-size: 16px; font-weight: 700; animation: addrGlow 2.5s ease-in-out infinite; }
+  .location .bigloc { font-size: 22px; color: #ffdf22; letter-spacing: 1px; }
+  .location .subloc { font-size: 13px; color: #8b949e; font-weight: 600; }
   .location .pin { display: inline-block; animation: pinBounce 1.6s ease-in-out infinite; }
+  .devinfo { background: #0d1117; border: 1px solid #30363d; border-radius: 12px; padding: 6px 14px; margin-bottom: 4px; text-align: left; }
+  .devrow { display: flex; justify-content: space-between; align-items: center; padding: 9px 0; border-bottom: 1px solid #21262d; font-size: 13px; }
+  .devrow:last-child { border-bottom: none; }
+  .devrow span { color: #8b949e; }
+  .devrow b { color: #e6edf3; }
   @keyframes addrGlow {
     0%, 100% { text-shadow: 0 0 4px #58a6ff66; transform: scale(1); }
     50% { text-shadow: 0 0 18px #58a6ff, 0 0 32px #58a6ff88; transform: scale(1.04); }
@@ -106,7 +113,15 @@
         <a href="https://t.me/JOY_AHMED_88" class="cbtn telegram" target="_blank">➤ Telegram</a>
         <a href="https://github.com/JUBAED-AHMED-JOY" class="cbtn github" target="_blank">● GitHub</a>
       </div>
-      <p class="location"><span class="pin">📍</span> Jamalpur, Dhaka, Bangladesh</p>
+      <p class="location"><span class="pin">📍</span> <span class="bigloc">Sarishabari, Jamalpur</span><br><span class="subloc">Dhaka, Bangladesh</span></p>
+      <hr class="cdiv">
+      <h2>👨‍💻 DEVELOPER INFO</h2>
+      <div class="devinfo">
+        <div class="devrow"><span>👤 Name</span><b>Joy Ahmed</b></div>
+        <div class="devrow"><span>💼 Role</span><b>Bot & App Developer</b></div>
+        <div class="devrow"><span>🐙 GitHub</span><b>JUBAED-AHMED-JOY</b></div>
+        <div class="devrow"><span>☏ WhatsApp</span><b>+8801709045888</b></div>
+      </div>
       <hr class="cdiv">
       <h2>🎁 SKILLS</h2>
       <div class="skills">
