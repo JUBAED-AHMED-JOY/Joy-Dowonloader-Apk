@@ -30,7 +30,11 @@
   #result { display: none; }
   #result.show { display: block; }
   .thumb { width: 100%; border-radius: 10px; margin-bottom: 10px; }
+  .player { width: 100%; border-radius: 10px; margin-bottom: 10px; background: #000; max-height: 300px; }
   .title { font-size: 15px; font-weight: 600; margin-bottom: 10px; }
+  .dlv { margin-bottom: 8px; }
+  .dla { background: #1f6feb; margin-bottom: 4px; }
+  .dla:active { background: #388bfd; }
   .media { display: flex; align-items: center; justify-content: space-between; background: #0d1117; border: 1px solid #30363d; border-radius: 10px; padding: 10px 12px; margin-bottom: 8px; }
   .media .q { font-size: 13px; }
   .media .q b { color: #58a6ff; }
@@ -39,6 +43,9 @@
   .err { color: #f85149; font-size: 13px; text-align: center; padding: 8px; }
   .loading { text-align: center; color: #8b949e; font-size: 13px; padding: 12px; }
   footer { text-align: center; margin-top: 22px; padding-bottom: 20px; }
+  footer .info { background: #161b22; border: 1px solid #30363d; border-radius: 14px; padding: 16px; margin-bottom: 12px; }
+  footer .infoname { font-size: 16px; font-weight: 700; color: #58a6ff; margin-bottom: 6px; }
+  footer .infodet { font-size: 12px; color: #8b949e; margin-bottom: 3px; }
   footer .fl { display: flex; justify-content: center; gap: 14px; margin-bottom: 8px; }
   footer a { color: #58a6ff; font-size: 13px; text-decoration: none; }
   footer .fb { font-size: 11px; color: #6e7681; }
@@ -49,16 +56,7 @@
   <header>
     <h1>🎬 <span>JOY</span> Video Downloader</h1>
     <div class="brand">API by Joy Ahmed</div>
-    <button class="gear" onclick="toggleSettings()">⚙️</button>
   </header>
-
-  <div class="card" id="settings">
-    <div class="row">
-      <input type="text" id="apiBase" placeholder="API URL, e.g. https://xxx.vercel.app">
-      <button onclick="saveApi()">Save</button>
-    </div>
-    <div class="hint">Enter your downloader API base URL once. Get it from your Vercel deployment.</div>
-  </div>
 
   <div class="card">
     <input type="text" id="vurl" placeholder="Paste video link here…">
@@ -71,6 +69,11 @@
   <div class="card" id="result"></div>
 
   <footer>
+    <div class="info">
+      <div class="infoname">JOY AHMED</div>
+      <div class="infodet">📍 Jamalpur, Dhaka, Bangladesh</div>
+      <div class="infodet">💻 JavaScript · HTML · Telegram Bot Developer</div>
+    </div>
     <div class="fl">
       <a href="https://github.com/JUBAED-AHMED-JOY">GitHub</a>
       <a href="https://joy-info.vercel.app">Contact</a>
@@ -81,18 +84,7 @@
 </div>
 
 <script>
-function apiBase() { return (localStorage.getItem('joy_api_base') || '').replace(/\/+$/, ''); }
-function toggleSettings() {
-  const s = document.getElementById('settings');
-  s.classList.toggle('open');
-  document.getElementById('apiBase').value = apiBase();
-}
-function saveApi() {
-  const v = document.getElementById('apiBase').value.trim().replace(/\/+$/, '');
-  localStorage.setItem('joy_api_base', v);
-  document.getElementById('settings').classList.remove('open');
-  alert(v ? 'API URL saved ✅' : 'API URL cleared');
-}
+const API = 'https://nayan-video-downloader.vercel.app/alldown?url=';
 function detectPlatform(u) {
   u = u.toLowerCase();
   if (/youtu\.?be/.test(u)) return 'youtube';
@@ -109,38 +101,37 @@ document.getElementById('vurl').addEventListener('input', e => {
     s.classList.toggle('on', s.dataset.p === p));
 });
 async function fetchMedia() {
-  const base = apiBase();
   const vurl = document.getElementById('vurl').value.trim();
   const box = document.getElementById('result');
-  if (!base) { toggleSettings(); alert('Please set your API URL first (⚙️)'); return; }
   if (!vurl) { alert('Paste a video link first'); return; }
   const btn = document.getElementById('goBtn');
   btn.disabled = true;
   box.className = 'card show';
   box.innerHTML = '<div class="loading">⏳ Fetching…</div>';
   try {
-    const r = await fetch(base + '/JOY/all-video-downloader?url=' + encodeURIComponent(vurl));
+    const r = await fetch(API + encodeURIComponent(vurl));
     const d = await r.json();
-    if (d.status !== 'success' || !d.medias || !d.medias.length) {
-      box.innerHTML = '<div class="err">❌ ' + (d.message || 'No downloadable media found') + '</div>';
+    const info = d && d.data;
+    if (!d || d.status !== true || !info || (!info.high && !info.low)) {
+      box.innerHTML = '<div class="err">❌ No video found for that link.</div>';
+      btn.disabled = false;
       return;
     }
+    const vUrl = info.high || info.low;
+    const aUrl = info.low || info.high;
+    const esc = s => String(s || '').replace(/'/g, "\\'");
     let html = '';
-    if (d.thumbnail) html += '<img class="thumb" src="' + d.thumbnail + '">';
-    html += '<div class="title">' + (d.title || 'Video').replace(/</g, '&lt;') + '</div>';
-    d.medias.forEach(m => {
-      html += '<div class="media"><div class="q"><b>' + (m.quality || m.type) + '</b> <span class="sz">' +
-        (m.size_mb || '') + ' · ' + (m.ext || 'mp4').toUpperCase() + '</span></div>' +
-        '<button class="dl" onclick="dl(\'' + m.url.replace(/'/g, "\\'") + '\')">⬇ Download</button></div>';
-    });
+    html += '<video class="player" controls preload="metadata" src="' + vUrl + '"></video>';
+    html += '<div class="title">' + String(info.title || 'Video').replace(/</g, '&lt;') + '</div>';
+    html += '<button class="btn dlv" onclick="dl(\'' + esc(vUrl) + '\')">⬇ Download Video</button>';
+    html += '<button class="btn dla" onclick="dl(\'' + esc(aUrl) + '\')">🎵 Download Audio (Low)</button>';
     box.innerHTML = html;
   } catch (e) {
-    box.innerHTML = '<div class="err">❌ Could not reach API. Check the API URL in ⚙️ settings.</div>';
+    box.innerHTML = '<div class="err">❌ Could not fetch video. Check your internet and try again.</div>';
   }
   btn.disabled = false;
 }
 function dl(url) { window.location.href = url; }
-if (!apiBase()) { document.getElementById('settings').classList.add('open'); }
 </script>
 </body>
 </html>
