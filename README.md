@@ -2,7 +2,7 @@
 
 **Download videos from Facebook, YouTube, TikTok, Twitter/X, Instagram & Terabox — right on your phone.**
 
-> App by [Joy Ahmed](https://github.com/JUBAED-AHMED-JOY) · Video API by [Mohammad Nayan](https://nayan-video-downloader.vercel.app)
+> App by [Joy Ahmed](https://github.com/JUBAED-AHMED-JOY)
 
 ---
 
